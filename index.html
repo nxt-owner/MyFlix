@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyFlix - Your Ultimate Cinema Experience</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Outfit:wght@400;600;700;800&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+    <nav class="glass-nav">
+        <div class="container">
+            <div class="logo">
+                <span class="logo-accent">MY</span>FLIX
+            </div>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#download" class="btn-primary-sm">Download App</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <div class="hero-text">
+                <h1 class="animate-up">Your Ultimate <span class="text-gradient">Cinema</span> Experience, Anywhere.
+                </h1>
+                <p class="animate-up delay-1">Stream thousands of movies and TV shows in stunning detail. High-speed,
+                    high-quality, and tailored for you.</p>
+                <div class="cta-group animate-up delay-2">
+                    <a href="https://github.com/nxt-owner/MyFlix/releases/download/V1.0/app-release.apk"
+                        class="btn-primary">
+                        <i data-lucide="play-circle"></i>
+                        Get Started Free
+                    </a>
+                    <a href="#features" class="btn-secondary">Learn More</a>
+                </div>
+            </div>
+            <div class="hero-mockup animate-up delay-3">
+                <img src="app_mockup.png" alt="MyFlix App Mockup">
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why Choose <span class="text-gradient">MyFlix</span>?</h2>
+                <p>Designed for the true cinema lover.</p>
+            </div>
+            <div class="feature-grid">
+                <div class="feature-card glass">
+                    <div class="icon-box">
+                        <i data-lucide="zap"></i>
+                    </div>
+                    <h3>Fast Loading</h3>
+                    <p>Optimized streaming engines ensure you spend more time watching and less time buffering.</p>
+                </div>
+                <div class="feature-card glass">
+                    <div class="icon-box">
+                        <i data-lucide="shield-check"></i>
+                    </div>
+                    <h3>7-Day Free Trial</h3>
+                    <p>Experience the full premium power for 7 days before you decide. No strings attached.</p>
+                </div>
+                <div class="feature-card glass">
+                    <div class="icon-box">
+                        <i data-lucide="message-square"></i>
+                    </div>
+                    <h3>Real-time Support</h3>
+                    <p>Built-in premium support chat to help you anytime, directly from the app.</p>
+                </div>
+                <div class="feature-card glass">
+                    <div class="icon-box">
+                        <i data-lucide="smartphone"></i>
+                    </div>
+                    <h3>Always Updated</h3>
+                    <p>Fresh content delivered daily with a sleek, modern, and adaptive interface.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="download" class="download-section">
+        <div class="container">
+            <div class="download-card glass">
+                <div class="download-content">
+                    <h2>Ready to Watch?</h2>
+                    <p>Download the MyFlix mobile app today and start your 7-day free trial instantly. Join thousands of
+                        users worldwide.</p>
+                    <div class="store-buttons">
+                        <a href="https://github.com/nxt-owner/MyFlix/releases/download/V1.0/app-release.apk"
+                            class="store-btn">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
+                                alt="Google Play">
+                        </a>
+                    </div>
+                </div>
+                <div class="download-visual">
+                    <img src="app_mockup.png" alt="App Preview">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo">
+                    <span class="logo-accent">MY</span>FLIX
+                </div>
+                <p>&copy; 2026 MyFlix Cinema. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Simple scroll animation
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.glass').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
+</body>
+
+</html>
