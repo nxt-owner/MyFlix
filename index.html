@@ -5,10 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MyFlix - Your Ultimate Cinema Experience</title>
-    
+
     <!-- OpenGraph Meta Tags -->
     <meta property="og:title" content="MyFlix - Your Ultimate Cinema Experience">
-    <meta property="og:description" content="Stream thousands of movies and TV shows in stunning detail. High-speed, high-quality, and tailored for you.">
+    <meta property="og:description"
+        content="Stream thousands of movies and TV shows in stunning detail. High-speed, high-quality, and tailored for you.">
     <meta property="og:image" content="https://myflix.techlasiya.com/og_image.png">
     <meta property="og:url" content="https://myflix.techlasiya.com">
     <meta property="og:type" content="website">
@@ -33,9 +34,9 @@
         if (path !== "/") {
             const parts = path.split('/').filter(Boolean);
             if (parts.length >= 2) {
-                window.deepLink = { 
+                window.deepLink = {
                     type: parts[0], // movie or tv
-                    id: parts[1] 
+                    id: parts[1]
                 };
             }
         }
@@ -59,13 +60,14 @@
         <div class="hero-overlay"></div>
         <div class="container hero-content">
             <div class="hero-text">
-                <h1 class="animate-up" id="main-title">Your Ultimate <span class="text-gradient">Cinema</span> Experience, Anywhere.
+                <h1 class="animate-up" id="main-title">Your Ultimate <span class="text-gradient">Cinema</span>
+                    Experience, Anywhere.
                 </h1>
-                <p class="animate-up delay-1" id="main-desc">Stream thousands of movies and TV shows in stunning detail. High-speed,
+                <p class="animate-up delay-1" id="main-desc">Stream thousands of movies and TV shows in stunning detail.
+                    High-speed,
                     high-quality, and tailored for you.</p>
                 <div class="cta-group animate-up delay-2">
-                    <a href="https://github.com/nxt-owner/MyFlix/releases/download/V1.0/app-release.apk"
-                        class="btn-primary" id="primary-cta">
+                    <a href="#download" class="btn-primary" id="primary-cta">
                         <i data-lucide="play-circle"></i>
                         <span id="cta-text">Get Started Free</span>
                     </a>
@@ -158,19 +160,19 @@
         if (window.deepLink) {
             const { type, id } = window.deepLink;
             const typeLabel = type.charAt(0).toUpperCase() + type.slice(1);
-            
+
             // Update Title
             document.getElementById('main-title').innerHTML = `Ready to watch this <span class="text-gradient">${typeLabel}</span>?`;
-            
+
             // Update Description
             document.getElementById('main-desc').innerText = `You've been invited to watch this ${type} on MyFlix. Open it in the app to start streaming in high quality.`;
-            
+
             // Update Primary CTA to open app directly
             const appUrl = `slcinema://app/${type}/${id}`;
             const primaryCta = document.getElementById('primary-cta');
             primaryCta.href = appUrl;
             document.getElementById('cta-text').innerText = 'Open in MyFlix App';
-            
+
             // Also attempt to auto-redirect after a short delay
             setTimeout(() => {
                 window.location.href = appUrl;
