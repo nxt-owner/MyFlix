@@ -328,16 +328,95 @@
             gap: 16px;
         }
 
-        .store-btn {
+        .btn-download-premium {
+            display: inline-flex;
+            align-items: center;
+            gap: 16px;
+            background: linear-gradient(135deg, var(--surface-variant), rgba(255, 255, 255, 0.08));
+            border: 1px solid var(--border);
+            padding: 14px 28px;
+            border-radius: var(--radius);
+            color: var(--text-primary);
+            text-decoration: none;
+            font-family: 'Outfit', sans-serif;
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-download-premium::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 1;
+        }
+
+        .btn-download-premium > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        .btn-download-premium:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 28px rgba(157, 78, 221, 0.4);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-download-premium:hover::before {
+            opacity: 0.15;
+        }
+
+        .btn-download-premium:active {
+            transform: translateY(-2px);
+        }
+
+        .btn-download-icon-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            background: rgba(157, 78, 221, 0.15);
+            border-radius: 12px;
+            color: var(--primary-light);
             transition: all 0.3s;
         }
 
-        .store-btn:hover {
+        .btn-download-premium:hover .btn-download-icon-wrapper {
+            background: var(--primary);
+            color: white;
             transform: scale(1.05);
         }
 
-        .store-btn img {
-            height: 48px;
+        .download-arrow {
+            width: 20px;
+            height: 20px;
+        }
+
+        .btn-download-text-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .btn-download-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            line-height: 1.2;
+        }
+
+        .btn-download-subtitle {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            font-family: 'Inter', sans-serif;
+            margin-top: 2px;
         }
 
         .download-visual img {
@@ -555,10 +634,15 @@
                     <p>Download the MyFlix mobile app today and start your 7-day free trial instantly. Join thousands of
                         users worldwide.</p>
                     <div class="store-buttons">
-                        <a href="https://github.com/nxt-owner/MyFlix/releases/download/V2.0.0/MyFlix.apk"
-                            class="store-btn">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
-                                alt="Google Play">
+                        <a href="https://github.com/nxt-owner/MyFlix/releases/download/V2.0.1/app-release.apk"
+                            class="btn-download-premium">
+                            <div class="btn-download-icon-wrapper">
+                                <i data-lucide="download" class="download-arrow"></i>
+                            </div>
+                            <div class="btn-download-text-wrapper">
+                                <span class="btn-download-title">Download APK</span>
+                                <span class="btn-download-subtitle">Direct Download (V2.0.1)</span>
+                            </div>
                         </a>
                     </div>
                 </div>
@@ -608,7 +692,7 @@
 
             // Update Secondary CTA to download link
             const secondaryCta = document.getElementById('secondary-cta');
-            secondaryCta.href = "https://github.com/nxt-owner/MyFlix/releases/download/V2.0.0/MyFlix.apk";
+            secondaryCta.href = "https://github.com/nxt-owner/MyFlix/releases/download/V2.0.1/app-release.apk";
             secondaryCta.innerText = "Download APK";
         }
 
