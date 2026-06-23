@@ -11,16 +11,19 @@ MyFlix is a premium, high-performance media streaming ecosystem built with Flutt
 *   **Deep Detail Screens**: Full overviews, cast lists, trailers, and intelligent recommendations.
 *   **Seasons & Episodes**: Intuitive episode picker with season tracking for TV series.
 *   **Global Search**: Instant search functionality across the entire TMDB library.
+*   **Interactive Photo Gallery**: Fullscreen image slider in detail pages supporting pinch-to-zoom gestures, copying direct image URLs, and downloading high-resolution backdrops to local storage.
 
 ### 💎 2. Premium User Experience
 *   **7-Day Free Trial**: Automated trial activation for all new users.
 *   **Glassmorphic UI**: A state-of-the-art design language using dark mode, smooth gradients, and blurred surfaces.
-*   **Integrated Watchlist**: Save your favorite movies and shows for later viewing.
-*   **High-Performance Player**: Seamless video playback with support for movies and episodic content.
+*   **Integrated Watchlist with Offline Sync**: Saves favorites locally inside a Hive database for instant offline access, and auto-syncs with Cloud Firestore on authentication updates.
+*   **Ad-Block Shield Player**: Custom WebView sandbox layer containing AT_DOCUMENT_START script injections, window object sandboxing, network request interception, and CSS overrides to block popups, tracking, and ads.
+*   **Multi-Server Drawer**: Integrates VidLink, AutoEmbed, VidSrc, MoviesAPI, and Videasy for instant source switching in-player.
+*   **Sinhala Subtitle Aggregator**: Direct integration with the SinhalaSub Worker, letting users search, download, unzip, and apply Sinhalese subtitle tracks (filtered to PirateLK) directly from the player.
 
 ### 🔗 3. Advanced Connectivity
-*   **Deep Linking**: Share specific movies or shows using your custom domain (`myflix.techlasiya.com`). Links automatically open the app and navigate to the correct page.
-*   **OneSignal Push Notifications**: Real-time engagement with users through direct push messaging.
+*   **Deep Linking & Sharing**: Copy links or share via social apps using a custom glassmorphic `ShareBottomSheet`. Custom domain links (`myflix.techlasiya.com`) automatically open the app and route to specific movies or shows.
+*   **Real-time Live Chat**: A built-in customer support channel with markdown formatting (bold, italic, code, links) and image attachment uploads.
 
 ---
 
@@ -32,7 +35,8 @@ A high-control dashboard designed for project owners to manage the user ecosyste
 *   **Universal Search**: Effortlessly find users and support chats by name or email.
 *   **Manual Subscription Control**: Calendar-based tool to manually extend or modify user expiry dates.
 *   **Status Management**: One-tap approval, blocking, or manual expiry triggers.
-*   **Support Chat**: Integrated glassmorphic chat interface to communicate with users directly.
+*   **Support Chat**: Integrated real-time customer support chat featuring Markdown and picture uploads.
+*   **OneSignal Push Console**: Comprehensive composer to schedule and broadcast notifications with custom action buttons (up to 3), FreeImage.host media uploads, and template manager (Firestore integration) optimized via `ValueNotifier` and debounced validation.
 
 ---
 
@@ -43,34 +47,8 @@ A high-control dashboard designed for project owners to manage the user ecosyste
 
 ---
 
-## 🛠️ Technical Stack
-*   **Framework**: Flutter (Dart)
-*   **State Management**: Riverpod (Real-time streams & providers)
-*   **Navigation**: GoRouter (Deep-link & path-parameter support)
-*   **Backend**: Firebase (Auth & Firestore)
-*   **Notifications**: OneSignal SDK
-*   **Local Storage**: Shared Preferences (Watchlist & Local State)
-*   **API**: TMDB (The Movie Database)
 
----
 
-## 🚀 Getting Started
-
-1.  **Clone the Repo**: `git clone https://github.com/nxt-owner/MyFlix.git`
-2.  **Install Dependencies**: `flutter pub get`
-3.  **Setup Firebase**: Ensure `google-services.json` is in `android/app/`.
-4.  **Run Application**: `flutter run`
-
----
-
-## 📁 Project Structure
-*   `lib/core`: Routing, Themes, and Constants.
-*   `lib/models`: Data structures and JSON serialization.
-*   `lib/providers`: Riverpod state management logic.
-*   `lib/screens`: All UI screens (Home, Detail, Player, Admin).
-*   `lib/services`: Firebase, Watchlist, and OneSignal services.
-
----
 
 ## 📄 License
 © 2026 MyFlix Cinema. All rights reserved.
