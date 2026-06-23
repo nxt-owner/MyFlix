@@ -17,7 +17,7 @@
 * {
     margin: 0;
     padding: 0;
-    box-探索: border-box;
+    box-sizing: border-box;
 }
 
 body {
