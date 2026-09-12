@@ -4,766 +4,345 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MyFlix - Your Ultimate Cinema Experience</title>
+    <title>MyFlix - Cinema Portal</title>
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 
-    <!-- OpenGraph Meta Tags -->
-    <meta property="og:title" content="MyFlix - Your Ultimate Cinema Experience">
-    <meta property="og:description"
-        content="Stream thousands of movies and TV shows in stunning detail. High-speed, high-quality, and tailored for you.">
-    <meta property="og:image" content="https://myflix.techlasiya.com/og_image.png">
-    <meta property="og:url" content="https://myflix.techlasiya.com">
-    <meta property="og:type" content="website">
-
-    <!-- Twitter Card Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="MyFlix - Your Ultimate Cinema Experience">
-    <meta name="twitter:description" content="Stream thousands of movies and TV shows in stunning detail.">
-    <meta name="twitter:image" content="https://myflix.techlasiya.com/og_image.png">
-
-    <link rel="stylesheet" href="style.css">
+    <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Outfit:wght@400;600;700;800&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/style.css">
     <script src="https://unpkg.com/lucide@latest"></script>
+
     <style>
+        /* Standalone resilience styling for GitHub Pages & Local fallbacks */
         :root {
-            --primary: #9d4edd;
-            --primary-light: #c77dff;
-            --accent: #ff007f;
-            --background: #020205;
-            --surface: #0a0a0f;
-            --surface-variant: rgba(255, 255, 255, 0.05);
+            --bg-main: #06050b;
+            --bg-card: rgba(18, 14, 30, 0.85);
+            --primary: #8b5cf6;
+            --primary-light: #c084fc;
+            --primary-glow: rgba(139, 92, 246, 0.4);
+            --gradient-primary: linear-gradient(135deg, #8b5cf6 0%, #d946ef 50%, #ec4899 100%);
+            --gradient-btn: linear-gradient(135deg, #7c3aed 0%, #9333ea 50%, #c026d3 100%);
             --text-primary: #ffffff;
-            --text-secondary: rgba(255, 255, 255, 0.7);
-            --text-muted: rgba(255, 255, 255, 0.4);
-            --border: rgba(255, 255, 255, 0.1);
-            --glass: rgba(10, 10, 15, 0.8);
-            --radius: 16px;
-            --container-width: 1200px;
+            --text-secondary: rgba(255, 255, 255, 0.75);
+            --text-muted: rgba(255, 255, 255, 0.45);
+            --border-glass: rgba(255, 255, 255, 0.1);
+            --radius-md: 14px;
+            --radius-xl: 24px;
+            --radius-pill: 9999px;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--background);
+            font-family: 'Inter', -apple-system, sans-serif;
+            background-color: var(--bg-main);
             color: var(--text-primary);
-            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
             overflow-x: hidden;
+            background-image: radial-gradient(circle at 50% 30%, rgba(139, 92, 246, 0.15) 0%, transparent 70%);
         }
 
-        h1,
-        h2,
-        h3,
-        .logo {
+        .glass-nav {
+            padding: 18px 24px;
+            background: rgba(6, 5, 11, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-glass);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: #ffffff;
             font-family: 'Outfit', sans-serif;
-            letter-spacing: -0.02em;
-        }
-
-        .container {
-            max-width: var(--container-width);
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
-        /* Typography */
-        h1 {
-            font-size: 4.5rem;
+            font-size: 1.4rem;
             font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 24px;
         }
 
-        h2 {
-            font-size: 3rem;
+        .brand-icon {
+            width: 34px;
+            height: 34px;
+            border-radius: 9px;
+            box-shadow: 0 4px 12px var(--primary-glow);
+        }
+
+        .btn-nav-home {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 18px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-pill);
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 600;
+            transition: all 0.25s ease;
+        }
+        .btn-nav-home:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .portal-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .portal-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(192, 132, 252, 0.25);
+            border-radius: var(--radius-xl);
+            padding: 50px 40px;
+            max-width: 540px;
+            width: 100%;
+            text-align: center;
+            backdrop-filter: blur(24px);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7), 0 0 50px rgba(139, 92, 246, 0.15);
+            position: relative;
+        }
+
+        .portal-icon-box {
+            width: 68px;
+            height: 68px;
+            border-radius: 18px;
+            background: var(--gradient-btn);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: #ffffff;
+            box-shadow: 0 8px 24px var(--primary-glow);
+        }
+        .portal-icon-box svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .portal-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 14px;
+            background: rgba(139, 92, 246, 0.15);
+            border: 1px solid rgba(192, 132, 252, 0.3);
+            border-radius: var(--radius-pill);
+            font-size: 0.8rem;
             font-weight: 700;
+            color: var(--primary-light);
             margin-bottom: 16px;
         }
 
-        p {
-            font-size: 1.125rem;
+        .portal-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 12px;
+        }
+
+        .portal-desc {
+            font-size: 1.02rem;
             color: var(--text-secondary);
+            margin-bottom: 30px;
+            line-height: 1.6;
         }
 
         .text-gradient {
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            background: var(--gradient-primary);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        /* Components */
-        .btn-primary {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
-            color: white;
-            padding: 16px 32px;
-            border-radius: 100px;
-            text-decoration: none;
-            font-weight: 700;
-            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-            box-shadow: 0 8px 24px rgba(157, 78, 221, 0.3);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-4px) scale(1.05);
-            box-shadow: 0 12px 32px rgba(157, 78, 221, 0.5);
-        }
-
-        .btn-primary-sm {
-            display: inline-flex;
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
-            color: white;
-            padding: 10px 20px;
-            border-radius: 100px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: all 0.3s;
-        }
-
-        .btn-primary-sm:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(157, 78, 221, 0.3);
-        }
-
-        .btn-secondary {
-            display: inline-flex;
-            padding: 16px 32px;
-            border-radius: 100px;
-            text-decoration: none;
-            font-weight: 700;
-            color: white;
-            border: 1px solid var(--border);
-            background: var(--surface-variant);
-            transition: all 0.3s;
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.3);
-        }
-
-        .glass {
-            background: var(--glass);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-        }
-
-        /* Nav */
-        .glass-nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            padding: 20px 0;
-            backdrop-filter: blur(10px);
-            background: rgba(2, 2, 5, 0.5);
-            border-bottom: 1px solid var(--border);
-        }
-
-        .glass-nav .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: white;
-        }
-
-        .logo-accent {
-            color: var(--primary);
-        }
-
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 32px;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-secondary);
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: white;
-        }
-
-        /* Hero */
-        .hero {
-            position: relative;
-            padding: 160px 0 100px;
-            min-height: 90vh;
-            display: flex;
-            align-items: center;
-            background-image: url('https://myflix.techlasiya.com/hero_bg.png');
-            background-size: cover;
-            background-position: center;
-            overflow: hidden;
-        }
-
-        .hero-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 20% 50%, rgba(2, 2, 5, 0.8) 0%, rgba(2, 2, 5, 0.95) 100%);
-            z-index: 1;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            gap: 60px;
-            align-items: center;
-        }
-
-        .hero-text p {
-            margin-bottom: 40px;
-            max-width: 500px;
-            font-size: 1.25rem;
-        }
-
-        .cta-group {
-            display: flex;
-            gap: 20px;
-        }
-
-        .hero-mockup img {
-            width: 100%;
-            height: auto;
-            filter: drop-shadow(0 20px 50px rgba(157, 78, 221, 0.2));
-        }
-
-        /* Features */
-        .features {
-            padding: 120px 0;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
-        }
-
-        .feature-card {
-            padding: 40px;
-            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-
-        .feature-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--primary);
-            background: rgba(157, 78, 221, 0.03);
-        }
-
-        .icon-box {
-            width: 60px;
-            height: 60px;
-            background: rgba(157, 78, 221, 0.1);
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 24px;
-            color: var(--primary);
-        }
-
-        .feature-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 12px;
-        }
-
-        .feature-card p {
-            font-size: 1rem;
-        }
-
-        /* Download Section */
-        .download-section {
-            padding: 100px 0;
-        }
-
-        .download-card {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            padding: 80px;
-            align-items: center;
-            overflow: hidden;
-        }
-
-        .download-content h2 {
-            margin-bottom: 24px;
-        }
-
-        .download-content p {
-            margin-bottom: 40px;
-        }
-
-        .store-buttons {
-            display: flex;
-            gap: 16px;
-        }
-
-        .btn-download-premium {
-            display: inline-flex;
-            align-items: center;
-            gap: 16px;
-            background: linear-gradient(135deg, var(--surface-variant), rgba(255, 255, 255, 0.08));
-            border: 1px solid var(--border);
-            padding: 14px 28px;
-            border-radius: var(--radius);
-            color: var(--text-primary);
-            text-decoration: none;
-            font-family: 'Outfit', sans-serif;
-            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-download-premium::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            opacity: 0;
-            transition: opacity 0.4s ease;
-            z-index: 1;
-        }
-
-        .btn-download-premium>* {
-            position: relative;
-            z-index: 2;
-        }
-
-        .btn-download-premium:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 28px rgba(157, 78, 221, 0.4);
-            border-color: rgba(255, 255, 255, 0.2);
-        }
-
-        .btn-download-premium:hover::before {
-            opacity: 0.15;
-        }
-
-        .btn-download-premium:active {
-            transform: translateY(-2px);
-        }
-
-        .btn-download-icon-wrapper {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 42px;
-            height: 42px;
-            background: rgba(157, 78, 221, 0.15);
-            border-radius: 12px;
-            color: var(--primary-light);
-            transition: all 0.3s;
-        }
-
-        .btn-download-premium:hover .btn-download-icon-wrapper {
-            background: var(--primary);
-            color: white;
-            transform: scale(1.05);
-        }
-
-        .download-arrow {
-            width: 20px;
-            height: 20px;
-        }
-
-        .btn-download-text-wrapper {
+        .portal-cta-group {
             display: flex;
             flex-direction: column;
-            align-items: flex-start;
+            gap: 12px;
         }
 
-        .btn-download-title {
-            font-weight: 700;
-            font-size: 1.1rem;
-            line-height: 1.2;
-        }
-
-        .btn-download-subtitle {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            font-family: 'Inter', sans-serif;
-            margin-top: 2px;
-        }
-
-        .download-visual img {
-            width: 130%;
-            transform: rotate(-10deg) translateY(40px);
-            filter: drop-shadow(0 20px 50px rgba(157, 78, 221, 0.3));
-        }
-
-        /* Footer */
-        footer {
-            padding: 60px 0;
-            border-top: 1px solid var(--border);
-        }
-
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
+        .btn-portal-primary {
+            display: inline-flex;
             align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: var(--gradient-btn);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 14px 24px;
+            border-radius: var(--radius-md);
+            color: #ffffff;
+            text-decoration: none;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            font-size: 1.05rem;
+            box-shadow: 0 8px 24px var(--primary-glow);
+            transition: all 0.25s ease;
+        }
+        .btn-portal-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(139, 92, 246, 0.6);
         }
 
-        .footer-content p {
-            font-size: 0.9rem;
+        .btn-portal-secondary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-glass);
+            padding: 13px 24px;
+            border-radius: var(--radius-md);
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.94rem;
+            transition: all 0.25s ease;
+        }
+        .btn-portal-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .portal-timer-notice {
+            font-size: 0.82rem;
             color: var(--text-muted);
-        }
-
-        /* Animations */
-        .animate-up {
-            opacity: 0;
-            transform: translateY(30px);
-            animation: up 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
-        }
-
-        .delay-1 {
-            animation-delay: 0.2s;
-        }
-
-        .delay-2 {
-            animation-delay: 0.4s;
-        }
-
-        .delay-3 {
-            animation-delay: 0.6s;
-        }
-
-        @keyframes up {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .visible {
-            animation: up 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
-        }
-
-        /* Responsive */
-        @media (max-width: 992px) {
-            h1 {
-                font-size: 3.5rem;
-            }
-
-            .hero-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .hero-text p {
-                margin-left: auto;
-                margin-right: auto;
-            }
-
-            .cta-group {
-                justify-content: center;
-            }
-
-            .hero-mockup {
-                max-width: 500px;
-                margin: 0 auto;
-            }
-
-            .download-card {
-                grid-template-columns: 1fr;
-                padding: 40px;
-                text-align: center;
-            }
-
-            .store-buttons {
-                justify-content: center;
-            }
-
-            .download-visual {
-                display: none;
-            }
-        }
-
-        @media (max-width: 600px) {
-            h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero {
-                padding-top: 120px;
-            }
-
-            .nav-links a {
-                display: none;
-            }
-
-            .cta-group {
-                flex-direction: column;
-            }
-
-            .feature-card {
-                padding: 30px;
-            }
+            margin-top: 14px;
         }
     </style>
-    <script>
-        // Deep Link detection logic
-        window.deepLink = null;
-        const path = window.location.pathname;
-        if (path !== "/") {
-            const parts = path.split('/').filter(Boolean);
-            if (parts.length >= 2) {
-                window.deepLink = {
-                    type: parts[0], // movie or tv
-                    id: parts[1]
-                };
-            }
-        }
-    </script>
 </head>
 
 <body>
+    <!-- Top Bar -->
     <nav class="glass-nav">
-        <div class="container">
-            <div class="logo">
-                <span class="logo-accent">MY</span>FLIX
-            </div>
-            <div class="nav-links">
-                <a href="#features">Features</a>
-                <a href="#download" class="btn-primary-sm">Download App</a>
-            </div>
-        </div>
+        <a href="index.html" class="brand-link">
+            <img src="logo.png" alt="MyFlix App Icon" class="brand-icon" id="navLogo">
+            <span>MY<span style="color: var(--primary-light);">FLIX</span></span>
+        </a>
+        <a href="index.html" class="btn-nav-home" id="navHomeBtn">
+            <i data-lucide="home"></i>
+            <span>Home</span>
+        </a>
     </nav>
 
-    <section class="hero">
-        <div class="hero-overlay"></div>
-        <div class="container hero-content">
-            <div class="hero-text">
-                <h1 class="animate-up" id="main-title">Your Ultimate <span class="text-gradient">Cinema</span>
-                    Experience, Anywhere.
-                </h1>
-                <p class="animate-up delay-1" id="main-desc">Stream thousands of movies and TV shows in stunning detail.
-                    High-speed,
-                    high-quality, and tailored for you.</p>
-                <div class="cta-group animate-up delay-2">
-                    <a href="#download" class="btn-primary" id="primary-cta">
-                        <i data-lucide="play-circle"></i>
-                        <span id="cta-text">Get Started Free</span>
-                    </a>
-                    <a href="#features" class="btn-secondary" id="secondary-cta">Learn More</a>
-                </div>
+    <!-- Main Dynamic Portal -->
+    <main class="portal-container">
+        <div class="portal-card" id="portalCard">
+            <div class="portal-icon-box" id="portalIcon">
+                <i data-lucide="film"></i>
             </div>
-            <div class="hero-mockup animate-up delay-3">
-                <img src="https://myflix.techlasiya.com/app_mockup.png" alt="MyFlix App Mockup">
-            </div>
-        </div>
-    </section>
+            <div class="portal-badge" id="portalBadge">Processing Request...</div>
+            <h1 class="portal-title" id="portalTitle">Connecting to Cinema...</h1>
+            <p class="portal-desc" id="portalDesc">Please wait while we route your destination.</p>
 
-    <section id="features" class="features">
-        <div class="container">
-            <div class="section-header">
-                <h2>Why Choose <span class="text-gradient">MyFlix</span>?</h2>
-                <p>Designed for the true cinema lover. Explore our production-grade ecosystem features.</p>
+            <div class="portal-cta-group" id="portalCtaGroup">
+                <a href="index.html" class="btn-portal-primary">
+                    <span>Return to Homepage</span>
+                </a>
             </div>
-            <div class="feature-grid">
-                <div class="feature-card glass">
-                    <div class="icon-box">
-                        <i data-lucide="shield"></i>
-                    </div>
-                    <h3>Ad-Block Shield Player</h3>
-                    <p>A custom browser sandbox layer blocks ads, blank advertising overlays, and malicious redirect
-                        requests before they load.</p>
-                </div>
-                <div class="feature-card glass">
-                    <div class="icon-box">
-                        <i data-lucide="server"></i>
-                    </div>
-                    <h3>Multi-Server Drawer</h3>
-                    <p>Switch between VidLink, AutoEmbed, VidSrc, MoviesAPI, and Videasy instantly within the player for
-                        uninterrupted streaming.</p>
-                </div>
-                <div class="feature-card glass">
-                    <div class="icon-box">
-                        <i data-lucide="languages"></i>
-                    </div>
-                    <h3>Sinhala Subtitle Aggregator</h3>
-                    <p>Search, download, and auto-inject Sinhalese subtitles directly inside the video player, powered
-                        by the SinhalaSub Worker.</p>
-                </div>
-                <div class="feature-card glass">
-                    <div class="icon-box">
-                        <i data-lucide="refresh-cw"></i>
-                    </div>
-                    <h3>Watchlist Offline Sync</h3>
-                    <p>A hybrid local-cloud system caching favorites via Hive and syncing automatically with Cloud
-                        Firestore when online.</p>
-                </div>
-                <div class="feature-card glass">
-                    <div class="icon-box">
-                        <i data-lucide="image"></i>
-                    </div>
-                    <h3>Interactive Photo Gallery</h3>
-                    <p>Detail screens feature high-res backdrop photo sliders with pinch-to-zoom, image link copying,
-                        and direct downloading.</p>
-                </div>
-                <div class="feature-card glass">
-                    <div class="icon-box">
-                        <i data-lucide="share-2"></i>
-                    </div>
-                    <h3>Smart Link Sharing</h3>
-                    <p>Custom glassmorphic share sheet generates deep-links to copy direct URLs or share content via
-                        messaging platforms.</p>
-                </div>
-                <div class="feature-card glass">
-                    <div class="icon-box">
-                        <i data-lucide="message-square"></i>
-                    </div>
-                    <h3>Real-time Live Chat</h3>
-                    <p>Built-in glassmorphic messenger supporting Markdown formatting and picture attachments to resolve
-                        issues instantly.</p>
-                </div>
-                <div class="feature-card glass">
-                    <div class="icon-box">
-                        <i data-lucide="bell"></i>
-                    </div>
-                    <h3>Admin Push Console</h3>
-                    <p>Powerful console for admins to compose, schedule, and broadcast rich notifications with custom
-                        buttons and templates.</p>
-                </div>
-            </div>
+            <div class="portal-timer-notice" id="portalTimer"></div>
         </div>
-    </section>
-
-    <section id="download" class="download-section">
-        <div class="container">
-            <div class="download-card glass">
-                <div class="download-content">
-                    <h2>Ready to Watch?</h2>
-                    <p>Download the MyFlix mobile app today and start your 7-day free trial instantly. Join thousands of
-                        users worldwide.</p>
-                    <div class="store-buttons">
-                        <a href="https://github.com/nxt-owner/MyFlix/releases/download/V2.4.0/MyFlix-V2.4.0.apk"
-                            class="btn-download-premium">
-                            <div class="btn-download-icon-wrapper">
-                                <i data-lucide="download" class="download-arrow"></i>
-                            </div>
-                            <div class="btn-download-text-wrapper">
-                                <span class="btn-download-title">Download APK</span>
-                                <span class="btn-download-subtitle">Direct Download (V2.4.0)</span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="download-visual">
-                    <img src="https://myflix.techlasiya.com/app_mockup.png" alt="App Preview">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="logo">
-                    <span class="logo-accent">MY</span>FLIX
-                </div>
-                <p>&copy; 2026 MyFlix Cinema. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+    </main>
 
     <script>
-        // Initialize Lucide icons
-        lucide.createIcons();
 
-        // Deep Link Dynamic UI Update
-        if (window.deepLink) {
-            const { type, id } = window.deepLink;
-            const typeLabel = type.charAt(0).toUpperCase() + type.slice(1);
-
-            // Update Title
-            document.getElementById('main-title').innerHTML = `Ready to watch this <span class="text-gradient">${typeLabel}</span>?`;
-
-            // Update Description
-            document.getElementById('main-desc').innerText = `You've been invited to watch this ${type} on MyFlix. Open it in the app to start streaming in high quality.`;
-
-            // Update Primary CTA to open app directly
-            const appUrl = `slcinema://app/${type}/${id}`;
-            const primaryCta = document.getElementById('primary-cta');
-            primaryCta.href = appUrl;
-            document.getElementById('cta-text').innerText = 'Open in MyFlix App';
-
-            // Also attempt to auto-redirect after a short delay
-            setTimeout(() => {
-                window.location.href = appUrl;
-            }, 1500);
-
-            // Update Secondary CTA to download link
-            const secondaryCta = document.getElementById('secondary-cta');
-            secondaryCta.href = "https://github.com/nxt-owner/MyFlix/releases/download/V2.4.0/MyFlix-V2.4.0.apk";
-            secondaryCta.innerText = "Download APK";
+        // Deep Link detection logic
+        const path = window.location.pathname;
+        let deepLink = null;
+        if (path && path !== "/" && !path.endsWith("404.html")) {
+            const parts = path.split('/').filter(Boolean);
+            for (let i = 0; i < parts.length - 1; i++) {
+                const seg = parts[i].toLowerCase();
+                if (seg === 'movie' || seg === 'tv') {
+                    deepLink = {
+                        type: seg,
+                        id: parts[i + 1]
+                    };
+                    break;
+                }
+            }
         }
 
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                const targetId = this.getAttribute('href');
-                if (targetId.startsWith('#') && targetId.length > 1) {
-                    e.preventDefault();
-                    document.querySelector(targetId).scrollIntoView({
-                        behavior: 'smooth'
-                    });
+        const portalBadge = document.getElementById('portalBadge');
+        const portalIcon = document.getElementById('portalIcon');
+        const portalTitle = document.getElementById('portalTitle');
+        const portalDesc = document.getElementById('portalDesc');
+        const portalCtaGroup = document.getElementById('portalCtaGroup');
+        const portalTimer = document.getElementById('portalTimer');
+
+        if (deepLink) {
+            const { type, id } = deepLink;
+            const typeLabel = type === 'tv' ? 'TV Series' : 'Movie';
+            const appUrl = `slcinema://app/${type}/${id}`;
+            const apkUrl = "https://github.com/nxt-owner/MyFlix/releases/download/V2.4.0/MyFlix-V2.4.0.apk";
+
+            document.title = `MyFlix - Opening ${typeLabel}...`;
+            portalBadge.innerHTML = `<span style="width:8px;height:8px;background:#10b981;border-radius:50%;display:inline-block;"></span> Deep-Link Detected`;
+            portalIcon.innerHTML = `<i data-lucide="play-circle"></i>`;
+            portalTitle.innerHTML = `Opening in <span class="text-gradient">MyFlix App</span>`;
+            portalDesc.innerHTML = `Launching this <strong>${typeLabel}</strong> directly in high definition on your MyFlix player.`;
+
+            portalCtaGroup.innerHTML = `
+                <a href="${appUrl}" class="btn-portal-primary">
+                    <i data-lucide="play"></i>
+                    <span>Open in MyFlix App</span>
+                </a>
+                <a href="${apkUrl}" class="btn-portal-secondary" download>
+                    <i data-lucide="download"></i>
+                    <span>Don't have the app? Download APK</span>
+                </a>
+                <a href="index.html" style="color: var(--text-muted); font-size: 0.88rem; text-decoration: none; margin-top: 6px;">
+                    &larr; Return to MyFlix Homepage
+                </a>
+            `;
+
+            let secondsLeft = 2;
+            portalTimer.innerText = `Auto-launching in ${secondsLeft}s...`;
+            const interval = setInterval(() => {
+                secondsLeft--;
+                if (secondsLeft > 0) {
+                    portalTimer.innerText = `Auto-launching in ${secondsLeft}s...`;
+                } else {
+                    clearInterval(interval);
+                    portalTimer.innerText = `If the app didn't open automatically, tap 'Open in MyFlix App' above.`;
+                    window.location.href = appUrl;
                 }
-            });
-        });
+            }, 1000);
 
-        // Simple scroll animationn
-        const observerOptions = {
-            threshold: 0.1
-        };
+        } else {
+            // Standard 404 Experience
+            document.title = "404 - Scene Not Found | MyFlix";
+            portalBadge.innerHTML = `<i data-lucide="alert-circle"></i> 404 &bull; Missing Reel`;
+            portalIcon.innerHTML = `<i data-lucide="film"></i>`;
+            portalTitle.innerHTML = `Lost in the <span class="text-gradient">Cinema Void</span>`;
+            portalDesc.innerHTML = `The scene or page you are looking for was cut from the final edit or never existed.`;
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
+            portalCtaGroup.innerHTML = `
+                <a href="index.html" class="btn-portal-primary">
+                    <i data-lucide="home"></i>
+                    <span>Return to Homepage</span>
+                </a>
+                <a href="https://github.com/nxt-owner/MyFlix/releases/download/V2.4.0/MyFlix-V2.4.0.apk" class="btn-portal-secondary" download>
+                    <i data-lucide="download"></i>
+                    <span>Download MyFlix App (APK)</span>
+                </a>
+            `;
+            portalTimer.innerHTML = `<a href="index.html" style="color: var(--primary-light); text-decoration: none; font-size: 0.88rem;">&larr; Back to MyFlix Cinema</a>`;
+        }
 
-        document.querySelectorAll('.glass').forEach(card => {
-            observer.observe(card);
-        });
+        lucide.createIcons();
     </script>
 </body>
 

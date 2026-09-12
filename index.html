@@ -9,10 +9,10 @@
     <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 
-    <!-- OpenGraph Meta Tags  -->
+    <!-- OpenGraph Meta Tags -->
     <meta property="og:title" content="MyFlix - Your Ultimate Cinema Experience">
     <meta property="og:description"
-        content="Stream thousands of movies and TV shows in stunning detail. High-speed, high-quality, and tailored for you.">
+        content="Stream thousands of blockbuster movies and TV series in stunning 4K detail. Built-in Ad-Block Shield, 5 fast servers, and Sinhala subtitles.">
     <meta property="og:image" content="https://raw.githubusercontent.com/nxt-owner/MyFlix/refs/heads/main/og_image.png">
     <meta property="og:url" content="https://myflix.techlasiya.com">
     <meta property="og:type" content="website">
@@ -20,242 +20,631 @@
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="MyFlix - Your Ultimate Cinema Experience">
-    <meta name="twitter:description" content="Stream thousands of movies and TV shows in stunning detail.">
+    <meta name="twitter:description"
+        content="Stream thousands of movies and TV shows in stunning detail with Sinhala subtitles and Ad-Block player.">
     <meta name="twitter:image" content="https://myflix.techlasiya.com/og_image.png">
 
-    <link rel="stylesheet" href="style.css">
+    <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Outfit:wght@400;600;700;800&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
     <script src="https://unpkg.com/lucide@latest"></script>
+
     <script>
-        // Deep Link detection logic
+        // Robust Deep Link detection logic
         window.deepLink = null;
         const path = window.location.pathname;
-        if (path !== "/") {
+        if (path && path !== "/" && !path.endsWith("index.html")) {
             const parts = path.split('/').filter(Boolean);
-            if (parts.length >= 2) {
-                window.deepLink = {
-                    type: parts[0], // movie or tv
-                    id: parts[1]
-                };
+            for (let i = 0; i < parts.length - 1; i++) {
+                const seg = parts[i].toLowerCase();
+                if (seg === 'movie' || seg === 'tv') {
+                    window.deepLink = {
+                        type: seg,
+                        id: parts[i + 1]
+                    };
+                    break;
+                }
             }
         }
     </script>
 </head>
 
 <body>
-    <nav class="glass-nav">
-        <div class="container">
-            <div class="logo">
-                <span class="logo-accent">MY</span>FLIX
-            </div>
-            <div class="nav-links">
-                <a href="#features">Features</a>
-                <a href="#download" class="btn-primary-sm">Download App</a>
+    <!-- Top Navigation -->
+    <nav class="glass-nav" id="mainNav">
+        <div class="container nav-container">
+            <a href="#" class="brand-link">
+                <img src="logo.png" alt="MyFlix App Icon" class="brand-icon">
+                <span class="brand-text">MY<span class="brand-accent">FLIX</span></span>
+            </a>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#features" class="nav-link">Features</a></li>
+                <li><a href="#showcase" class="nav-link">Showcase</a></li>
+                <li><a href="#install" class="nav-link">Installation</a></li>
+                <li><a href="#faq" class="nav-link">FAQ</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <a href="https://github.com/nxt-owner/MyFlix/releases/download/V2.4.0/MyFlix-V2.4.0.apk"
+                    class="btn-nav-download" download>
+                    <i data-lucide="download"></i>
+                    <span>Download APK</span>
+                </a>
+                <button class="nav-toggle-btn" id="navToggle" aria-label="Toggle Menu">
+                    <i data-lucide="menu"></i>
+                </button>
             </div>
         </div>
     </nav>
 
-    <section class="hero">
-        <div class="hero-overlay"></div>
-        <div class="container hero-content">
-            <div class="hero-text">
-                <h1 class="animate-up" id="main-title">Your Ultimate <span class="text-gradient">Cinema</span>
-                    Experience, Anywhere.
-                </h1>
-                <p class="animate-up delay-1" id="main-desc">Stream thousands of movies and TV shows in stunning detail.
-                    High-speed,
-                    high-quality, and tailored for you.</p>
-                <div class="cta-group animate-up delay-2">
-                    <a href="#download" class="btn-primary" id="primary-cta">
-                        <i data-lucide="play-circle"></i>
-                        <span id="cta-text">Get Started Free</span>
-                    </a>
-                    <a href="#features" class="btn-secondary" id="secondary-cta">Learn More</a>
-                </div>
-            </div>
-            <div class="hero-mockup animate-up delay-3">
-                <img src="app_mockup.png" alt="MyFlix App Mockup">
-            </div>
-        </div>
-    </section>
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-overlay"></div>
+            <div class="container hero-content">
+                <div class="hero-text">
+                    <div class="hero-badge">
+                        <span class="badge-dot"></span>
+                        <span>Version 2.4.0 Live &bull; 4K Ad-Free Streaming</span>
+                    </div>
 
-    <section id="features" class="features">
-        <div class="container">
-            <div class="section-header">
-                <h2>Why Choose <span class="text-gradient">MyFlix</span>?</h2>
-                <p>Designed for the true cinema lover. Explore our production-grade ecosystem features.</p>
-            </div>
-            <div class="feature-grid">
-                <div class="feature-card glass">
-                    <div class="icon-box">
-                        <i data-lucide="shield"></i>
-                    </div>
-                    <h3>Ad-Block Shield Player</h3>
-                    <p>A custom browser sandbox layer blocks ads, blank advertising overlays, and malicious redirect
-                        requests before they load.</p>
-                </div>
-                <div class="feature-card glass">
-                    <div class="icon-box">
-                        <i data-lucide="server"></i>
-                    </div>
-                    <h3>Multi-Server Drawer</h3>
-                    <p>Switch between VidLink, AutoEmbed, VidSrc, MoviesAPI, and Videasy instantly within the player for
-                        uninterrupted streaming.</p>
-                </div>
-                <div class="feature-card glass">
-                    <div class="icon-box">
-                        <i data-lucide="languages"></i>
-                    </div>
-                    <h3>Sinhala Subtitle Aggregator</h3>
-                    <p>Search, download, and auto-inject Sinhalese subtitles directly inside the video player, powered
-                        by the SinhalaSub Worker.</p>
-                </div>
-                <div class="feature-card glass">
-                    <div class="icon-box">
-                        <i data-lucide="refresh-cw"></i>
-                    </div>
-                    <h3>Watchlist Offline Sync</h3>
-                    <p>A hybrid local-cloud system caching favorites via Hive and syncing automatically with Cloud
-                        Firestore when online.</p>
-                </div>
-                <div class="feature-card glass">
-                    <div class="icon-box">
-                        <i data-lucide="image"></i>
-                    </div>
-                    <h3>Interactive Photo Gallery</h3>
-                    <p>Detail screens feature high-res backdrop photo sliders with pinch-to-zoom, image link copying,
-                        and direct downloading.</p>
-                </div>
-                <div class="feature-card glass">
-                    <div class="icon-box">
-                        <i data-lucide="share-2"></i>
-                    </div>
-                    <h3>Smart Link Sharing</h3>
-                    <p>Custom glassmorphic share sheet generates deep-links to copy direct URLs or share content via
-                        messaging platforms.</p>
-                </div>
-                <div class="feature-card glass">
-                    <div class="icon-box">
-                        <i data-lucide="message-square"></i>
-                    </div>
-                    <h3>Real-time Live Chat</h3>
-                    <p>Built-in glassmorphic messenger supporting Markdown formatting and picture attachments to resolve
-                        issues instantly.</p>
-                </div>
-                <div class="feature-card glass">
-                    <div class="icon-box">
-                        <i data-lucide="bell"></i>
-                    </div>
-                    <h3>Admin Push Console</h3>
-                    <p>Powerful console for admins to compose, schedule, and broadcast rich notifications with custom
-                        buttons and templates.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+                    <h1 id="main-title">
+                        Your Ultimate <span class="text-gradient">Cinema</span> Experience, Anywhere.
+                    </h1>
 
-    <section id="download" class="download-section">
-        <div class="container">
-            <div class="download-card glass">
-                <div class="download-content">
-                    <h2>Ready to Watch?</h2>
-                    <p>Download the MyFlix mobile app today and start your 7-day free trial instantly. Join thousands of
-                        users worldwide.</p>
-                    <div class="store-buttons">
+                    <p id="main-desc">
+                        Stream thousands of movies and TV series in stunning definition.
+                        Equipped with an Ad-Block Shield, 5 instant streaming servers, and native Sinhala subtitles.
+                    </p>
+
+                    <div class="cta-group">
                         <a href="https://github.com/nxt-owner/MyFlix/releases/download/V2.4.0/MyFlix-V2.4.0.apk"
-                            class="btn-download-premium">
+                            class="btn-download-premium" id="primary-cta" download>
                             <div class="btn-download-icon-wrapper">
-                                <i data-lucide="download" class="download-arrow"></i>
+                                <svg class="android-icon" viewBox="0 0 24 24">
+                                    <path
+                                        d="M17.523 15.3414c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.551 0 .9993.4482.9993.9993.0001.5511-.4483.9997-.9993.9997m-11.046 0c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.551 0 .9993.4482.9993.9993 0 .5511-.4483.9997-.9993.9997m11.4045-6.02l1.9973-3.4592a.416.416 0 00-.1521-.5676.416.416 0 00-.5676.1521l-2.0223 3.503C15.5902 8.4111 13.8533 8 12 8s-3.5902.4111-5.1367.9497L4.841 5.4467a.4161.4161 0 00-.5677-.1521.4157.4157 0 00-.1521.5676l1.9973 3.4592C2.6889 11.1867.3432 14.6589 0 18.761h24c-.3432-4.1021-2.6889-7.5743-6.1185-9.4396" />
+                                </svg>
                             </div>
                             <div class="btn-download-text-wrapper">
-                                <span class="btn-download-title">Download APK</span>
-                                <span class="btn-download-subtitle">Direct Download (V2.4.0)</span>
+                                <span class="btn-download-badge">For Android</span>
+                                <span class="btn-download-title" id="cta-text">Download APK</span>
+                                <span class="btn-download-subtitle">v2.4.0 &bull; Direct Download</span>
+                            </div>
+                            <div class="btn-download-action">
+                                <i data-lucide="arrow-down" class="download-arrow"></i>
                             </div>
                         </a>
+
+                        <a href="#features" class="btn-glass-secondary" id="secondary-cta">
+                            <i data-lucide="compass"></i>
+                            <span>Explore Features</span>
+                        </a>
                     </div>
+
+                    <ul class="hero-trust-list">
+                        <li class="trust-item">
+                            <i data-lucide="shield-check"></i>
+                            <span>100% VirusTotal Clean</span>
+                        </li>
+                        <li class="trust-item">
+                            <i data-lucide="smartphone"></i>
+                            <span>Android 7.0+ & TV</span>
+                        </li>
+                        <li class="trust-item">
+                            <i data-lucide="sparkles"></i>
+                            <span>7-Day Free Trial</span>
+                        </li>
+                        <li class="trust-item">
+                            <i data-lucide="zap"></i>
+                            <span>No Ads On UI</span>
+                        </li>
+                    </ul>
                 </div>
-                <div class="download-visual">
-                    <img src="app_mockup.png" alt="App Preview">
+
+                <div class="hero-visual-wrapper">
+                    <div class="device-halo"></div>
+
+                    <!-- Floating Chips -->
+                    <div class="floating-chip chip-top-right">
+                        <div class="chip-icon"><i data-lucide="shield"></i></div>
+                        <span>Ad-Shield Sandbox Active</span>
+                    </div>
+
+                    <div class="floating-chip chip-bottom-left">
+                        <div class="chip-icon"><i data-lucide="languages"></i></div>
+                        <span>Sinhala Subtitles Synced</span>
+                    </div>
+
+                    <div class="floating-chip chip-mid-left">
+                        <div class="chip-icon"><i data-lucide="server"></i></div>
+                        <span>5 Instant Video Engines</span>
+                    </div>
+
+                    <img src="app_mockup.png" alt="MyFlix App Interface Mockup" class="hero-device-img">
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="logo">
-                    <span class="logo-accent">MY</span>FLIX
+        <!-- Showcase / Streaming Marquee -->
+        <section id="showcase" class="marquee-section">
+            <div class="marquee-header">
+                <span>Trending Now on MyFlix</span>
+            </div>
+            <div class="marquee-track">
+                <div class="media-pill">
+                    <span class="media-pill-tag">4K UHD</span>
+                    <strong>Dune: Part Two</strong>
+                    <div class="media-pill-rating"><i data-lucide="star"></i> 8.6</div>
                 </div>
+                <div class="media-pill">
+                    <span class="media-pill-tag">IMAX</span>
+                    <strong>Oppenheimer</strong>
+                    <div class="media-pill-rating"><i data-lucide="star"></i> 8.9</div>
+                </div>
+                <div class="media-pill">
+                    <span class="media-pill-tag">HDR10</span>
+                    <strong>Spider-Man: Across the Spider-Verse</strong>
+                    <div class="media-pill-rating"><i data-lucide="star"></i> 8.7</div>
+                </div>
+                <div class="media-pill">
+                    <span class="media-pill-tag">Series</span>
+                    <strong>Arcane: League of Legends</strong>
+                    <div class="media-pill-rating"><i data-lucide="star"></i> 9.0</div>
+                </div>
+                <div class="media-pill">
+                    <span class="media-pill-tag">Popular</span>
+                    <strong>Stranger Things</strong>
+                    <div class="media-pill-rating"><i data-lucide="star"></i> 8.7</div>
+                </div>
+                <div class="media-pill">
+                    <span class="media-pill-tag">4K UHD</span>
+                    <strong>The Batman</strong>
+                    <div class="media-pill-rating"><i data-lucide="star"></i> 8.1</div>
+                </div>
+                <div class="media-pill">
+                    <span class="media-pill-tag">Sci-Fi</span>
+                    <strong>Interstellar</strong>
+                    <div class="media-pill-rating"><i data-lucide="star"></i> 8.7</div>
+                </div>
+                <!-- Duplicate for seamless scroll loop -->
+                <div class="media-pill">
+                    <span class="media-pill-tag">4K UHD</span>
+                    <strong>Dune: Part Two</strong>
+                    <div class="media-pill-rating"><i data-lucide="star"></i> 8.6</div>
+                </div>
+                <div class="media-pill">
+                    <span class="media-pill-tag">IMAX</span>
+                    <strong>Oppenheimer</strong>
+                    <div class="media-pill-rating"><i data-lucide="star"></i> 8.9</div>
+                </div>
+                <div class="media-pill">
+                    <span class="media-pill-tag">HDR10</span>
+                    <strong>Spider-Man: Across the Spider-Verse</strong>
+                    <div class="media-pill-rating"><i data-lucide="star"></i> 8.7</div>
+                </div>
+                <div class="media-pill">
+                    <span class="media-pill-tag">Series</span>
+                    <strong>Arcane: League of Legends</strong>
+                    <div class="media-pill-rating"><i data-lucide="star"></i> 9.0</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bento Grid Features Section -->
+        <section id="features" class="features-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag"><i data-lucide="sparkles"></i> Next-Gen Architecture</span>
+                    <h2>Engineered for <span class="text-gradient">True Cinema Lovers</span></h2>
+                    <p>Designed with Flutter & Firebase. Experience uninterrupted streaming with customized sandboxing and
+                        cloud synchronization.</p>
+                </div>
+
+                <div class="bento-grid">
+                    <!-- Bento 1: Ad-Block Shield Player -->
+                    <div class="bento-card bento-col-8">
+                        <div class="bento-icon-box">
+                            <i data-lucide="shield"></i>
+                        </div>
+                        <h3>Ad-Block Shield Sandbox Player</h3>
+                        <p>Our custom WebView sandbox layer applies AT_DOCUMENT_START script injections, intercepting
+                            network requests and blocking popups, redirects, and blank ad overlays before they ever render.</p>
+                        <div class="ad-shield-meter">
+                            <div class="ad-shield-metric">
+                                <span class="metric-num">0</span>
+                                <span class="metric-label">Intrusive Ads Allowed</span>
+                            </div>
+                            <div class="ad-shield-metric">
+                                <span class="metric-num">100%</span>
+                                <span class="metric-label">Sandbox Enforcement</span>
+                            </div>
+                            <div class="ad-shield-metric">
+                                <span class="metric-num">Instant</span>
+                                <span class="metric-label">Popup Neutralization</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bento 2: Multi-Server Drawer -->
+                    <div class="bento-card bento-col-4">
+                        <div class="bento-icon-box">
+                            <i data-lucide="server"></i>
+                        </div>
+                        <h3>Multi-Server Drawer</h3>
+                        <p>Switch between 5 premium stream providers directly inside the playback drawer without leaving
+                            your movie.</p>
+                        <div class="bento-visual-server-list">
+                            <span class="server-pill"><span class="server-dot"></span> VidLink</span>
+                            <span class="server-pill"><span class="server-dot"></span> AutoEmbed</span>
+                            <span class="server-pill"><span class="server-dot"></span> VidSrc</span>
+                            <span class="server-pill"><span class="server-dot"></span> MoviesAPI</span>
+                            <span class="server-pill"><span class="server-dot"></span> Videasy</span>
+                        </div>
+                    </div>
+
+                    <!-- Bento 3: Sinhala Subtitles -->
+                    <div class="bento-card bento-col-4">
+                        <div class="bento-icon-box">
+                            <i data-lucide="languages"></i>
+                        </div>
+                        <h3>Sinhala Subtitle Aggregator</h3>
+                        <p>Integrated directly with SinhalaSub & PirateLK. Search, download, decompress, and sync
+                            Sinhala subtitle tracks effortlessly in-player.</p>
+                        <span class="badge-feature">SinhalaSub Worker Powered</span>
+                    </div>
+
+                    <!-- Bento 4: Offline Watchlist -->
+                    <div class="bento-card bento-col-4">
+                        <div class="bento-icon-box">
+                            <i data-lucide="refresh-cw"></i>
+                        </div>
+                        <h3>Watchlist Cloud Sync</h3>
+                        <p>Hybrid architecture utilizing a local Hive database for instant offline access, automatically
+                            syncing with Cloud Firestore when connected.</p>
+                        <span class="badge-feature">Hive DB + Firebase Firestore</span>
+                    </div>
+
+                    <!-- Bento 5: 4K Gallery -->
+                    <div class="bento-card bento-col-4">
+                        <div class="bento-icon-box">
+                            <i data-lucide="image"></i>
+                        </div>
+                        <h3>Interactive Photo Gallery</h3>
+                        <p>Explore high-resolution backdrops and movie stills with pinch-to-zoom gestures, one-tap image
+                            copying, and direct downloads.</p>
+                        <span class="badge-feature">Pinch-to-Zoom & Wallpaper Download</span>
+                    </div>
+
+                    <!-- Bento 6: Deep-Linking -->
+                    <div class="bento-card bento-col-6">
+                        <div class="bento-icon-box">
+                            <i data-lucide="share-2"></i>
+                        </div>
+                        <h3>Smart Deep-Link Sharing</h3>
+                        <p>Generate glassmorphic share sheets with custom deep links (`myflix.techlasiya.com`). Friends
+                            who tap your link open the exact title directly inside the app with seamless web fallback.</p>
+                        <span class="badge-feature">Android App Links Verified</span>
+                    </div>
+
+                    <!-- Bento 7: Real-time Live Chat -->
+                    <div class="bento-card bento-col-6">
+                        <div class="bento-icon-box">
+                            <i data-lucide="message-square"></i>
+                        </div>
+                        <h3>In-App Customer Support</h3>
+                        <p>Need assistance or movie suggestions? Reach our support directly via built-in real-time chat
+                            supporting Markdown formatting and image attachments.</p>
+                        <span class="badge-feature">Direct Admin Support Line</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Installation Guide Section -->
+        <section id="install" class="install-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag"><i data-lucide="download-cloud"></i> Quick Setup</span>
+                    <h2>Install in <span class="text-gradient">3 Simple Steps</span></h2>
+                    <p>No Google Play Store restrictions. Follow these simple steps to install the APK directly on any
+                        Android phone, tablet, or TV.</p>
+                </div>
+
+                <div class="steps-grid">
+                    <div class="step-card">
+                        <span class="step-number">01</span>
+                        <div class="step-icon-wrapper">
+                            <i data-lucide="download"></i>
+                        </div>
+                        <h3>Download the APK</h3>
+                        <p>Tap the download button to save the official MyFlix APK (v2.4.0) directly onto your Android
+                            device.</p>
+                    </div>
+
+                    <div class="step-card">
+                        <span class="step-number">02</span>
+                        <div class="step-icon-wrapper">
+                            <i data-lucide="check-circle-2"></i>
+                        </div>
+                        <h3>Allow Installation</h3>
+                        <p>Open the downloaded APK. If prompted, toggle "Allow from this source" in your Android security
+                            settings.</p>
+                    </div>
+
+                    <div class="step-card">
+                        <span class="step-number">03</span>
+                        <div class="step-icon-wrapper">
+                            <i data-lucide="play-circle"></i>
+                        </div>
+                        <h3>Stream & Enjoy</h3>
+                        <p>Launch MyFlix and claim your automated 7-day trial. Instant access to unlimited cinema in 4K
+                            resolution!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Download Conversion Card (CTA) -->
+        <section id="download" class="download-section">
+            <div class="container">
+                <div class="download-cta-box">
+                    <div class="download-grid">
+                        <div class="download-info">
+                            <h2>Experience Cinema <br><span class="text-gradient">Without Limits</span></h2>
+                            <p>Download the latest release today. No root required, clean safe installation, and
+                                automatic updates directly inside the app.</p>
+
+                            <div class="app-meta-specs">
+                                <div class="meta-spec-chip"><i data-lucide="tag"></i> Version: v2.4.0</div>
+                                <div class="meta-spec-chip"><i data-lucide="hard-drive"></i> Size: ~18 MB</div>
+                                <div class="meta-spec-chip"><i data-lucide="cpu"></i> Android 7.0+</div>
+                                <div class="meta-spec-chip"><i data-lucide="shield-check"></i> 100% Virus-Free</div>
+                            </div>
+
+                            <a href="https://github.com/nxt-owner/MyFlix/releases/download/V2.4.0/MyFlix-V2.4.0.apk"
+                                class="btn-download-premium" download>
+                                <div class="btn-download-icon-wrapper">
+                                    <svg class="android-icon" viewBox="0 0 24 24">
+                                        <path
+                                            d="M17.523 15.3414c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.551 0 .9993.4482.9993.9993.0001.5511-.4483.9997-.9993.9997m-11.046 0c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.551 0 .9993.4482.9993.9993 0 .5511-.4483.9997-.9993.9997m11.4045-6.02l1.9973-3.4592a.416.416 0 00-.1521-.5676.416.416 0 00-.5676.1521l-2.0223 3.503C15.5902 8.4111 13.8533 8 12 8s-3.5902.4111-5.1367.9497L4.841 5.4467a.4161.4161 0 00-.5677-.1521.4157.4157 0 00-.1521.5676l1.9973 3.4592C2.6889 11.1867.3432 14.6589 0 18.761h24c-.3432-4.1021-2.6889-7.5743-6.1185-9.4396" />
+                                    </svg>
+                                </div>
+                                <div class="btn-download-text-wrapper">
+                                    <span class="btn-download-badge">Direct Android APK</span>
+                                    <span class="btn-download-title">Download MyFlix APK</span>
+                                    <span class="btn-download-subtitle">Fast GitHub CDN &bull; Safe & Clean</span>
+                                </div>
+                                <div class="btn-download-action">
+                                    <i data-lucide="arrow-down" class="download-arrow"></i>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="download-visual-card">
+                            <img src="logo.png" alt="MyFlix Icon" class="app-badge-logo">
+                            <h3 class="app-badge-name">MyFlix Cinema</h3>
+                            <span class="app-badge-ver">Release v2.4.0 (Stable)</span>
+                            <p class="app-badge-ver-desc">Built with Flutter 3 & Firebase. Works smoothly on smartphones,
+                                tablets, and Android TV.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="faq-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag"><i data-lucide="help-circle"></i> Questions & Answers</span>
+                    <h2>Frequently Asked <span class="text-gradient">Questions</span></h2>
+                    <p>Everything you need to know about getting started with MyFlix.</p>
+                </div>
+
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Is MyFlix safe to install on my phone?</span>
+                            <i data-lucide="chevron-down" class="faq-icon"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Yes, 100%. The APK is built directly from source and verified through VirusTotal. Because
+                                MyFlix is distributed directly via GitHub Releases instead of the Google Play Store, Android
+                                will ask you to confirm "Install from unknown sources," which is standard for direct APK
+                                downloads.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>How does the 7-day free trial work?</span>
+                            <i data-lucide="chevron-down" class="faq-icon"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Every new user receives an instant, automated 7-day free trial upon launching the app for
+                                the first time. No credit card or payment information is required.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>How do Sinhala subtitles work in the player?</span>
+                            <i data-lucide="chevron-down" class="faq-icon"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>MyFlix connects with the SinhalaSub Worker, allowing you to search Sinhala subtitles directly
+                                from the player drawer. When selected, the subtitle file is downloaded, extracted, and
+                                automatically aligned with your video stream.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Can I use MyFlix on Android TV or Firestick?</span>
+                            <i data-lucide="chevron-down" class="faq-icon"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Yes! MyFlix can be side-loaded on Android TV, Google TV, and Amazon Fire TV devices using
+                                apps like 'Downloader' by entering the direct APK link.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>What makes the Ad-Block Shield special?</span>
+                            <i data-lucide="chevron-down" class="faq-icon"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Unlike regular browsers that let malicious scripts open popups or scam redirects, our custom
+                                player sandboxes the webview before scripts execute, giving you clean, uninterrupted
+                                playback.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a href="#" class="brand-link">
+                        <img src="logo.png" alt="MyFlix App Icon" class="brand-icon">
+                        <span class="brand-text">MY<span class="brand-accent">FLIX</span></span>
+                    </a>
+                    <p>The ultimate cinema streaming ecosystem. Fast switching servers, Sinhala subtitles, and zero
+                        annoying popups.</p>
+                </div>
+
+                <div class="footer-nav">
+                    <div class="footer-nav-col">
+                        <h4>Navigation</h4>
+                        <ul>
+                            <li><a href="#features">Features</a></li>
+                            <li><a href="#showcase">Showcase</a></li>
+                            <li><a href="#install">Installation</a></li>
+                            <li><a href="#faq">FAQ</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-nav-col">
+                        <h4>Releases</h4>
+                        <ul>
+                            <li><a href="https://github.com/nxt-owner/MyFlix/releases" target="_blank"
+                                    rel="noopener">GitHub Releases</a></li>
+                            <li><a href="#download">Download v2.4.0</a></li>
+                            <li><a href=".well-known/assetlinks.json" target="_blank">AssetLinks Verification</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
                 <p>&copy; 2026 MyFlix Cinema. All rights reserved.</p>
+                <p class="footer-disclaimer">Disclaimer: MyFlix does not host, upload, or store any video files on its
+                    servers. All content is scraped or embedded through public third-party video APIs.</p>
             </div>
         </div>
     </footer>
 
+    <!-- Interactive Scripts -->
     <script>
-        // Initialize Lucide icons
+        // 1. Initialize Lucide Icons
         lucide.createIcons();
 
-        // Deep Link Dynamic UI Update
+        // 2. Deep Link Dynamic UI Update
         if (window.deepLink) {
             const { type, id } = window.deepLink;
             const typeLabel = type.charAt(0).toUpperCase() + type.slice(1);
 
             // Update Title
-            document.getElementById('main-title').innerHTML = `Ready to watch this <span class="text-gradient">${typeLabel}</span>?`;
+            const mainTitle = document.getElementById('main-title');
+            if (mainTitle) {
+                mainTitle.innerHTML = `Ready to watch this <span class="text-gradient">${typeLabel}</span>?`;
+            }
 
             // Update Description
-            document.getElementById('main-desc').innerText = `You've been invited to watch this ${type} on MyFlix. Open it in the app to start streaming in high quality.`;
+            const mainDesc = document.getElementById('main-desc');
+            if (mainDesc) {
+                mainDesc.innerText = `You've been invited to watch this ${type} on MyFlix. Open it in the app to start streaming immediately in 4K.`;
+            }
 
             // Update Primary CTA to open app directly
             const appUrl = `slcinema://app/${type}/${id}`;
             const primaryCta = document.getElementById('primary-cta');
-            primaryCta.href = appUrl;
-            document.getElementById('cta-text').innerText = 'Open in MyFlix App';
+            if (primaryCta) {
+                primaryCta.href = appUrl;
+                document.getElementById('cta-text').innerText = 'Open in MyFlix App';
+            }
 
-            // Also attempt to auto-redirect after a short delay
+            // Auto-redirect attempt after short delay
             setTimeout(() => {
                 window.location.href = appUrl;
             }, 1500);
 
-            // Update Secondary CTA to download link
+            // Update Secondary CTA to direct download
             const secondaryCta = document.getElementById('secondary-cta');
-            secondaryCta.href = "https://github.com/nxt-owner/MyFlix/releases/download/V2.4.0/MyFlix-V2.4.0.apk";
-            secondaryCta.innerText = "Download APK";
+            if (secondaryCta) {
+                secondaryCta.href = "https://github.com/nxt-owner/MyFlix/releases/download/V2.4.0/MyFlix-V2.4.0.apk";
+                secondaryCta.innerHTML = `<i data-lucide="download"></i><span>Download APK (v2.4.0)</span>`;
+                lucide.createIcons();
+            }
         }
 
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                const targetId = this.getAttribute('href');
-                if (targetId.startsWith('#') && targetId.length > 1) {
-                    e.preventDefault();
-                    document.querySelector(targetId).scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                }
+        // 3. Mobile Navigation Toggle
+        const navToggle = document.getElementById('navToggle');
+        const mainNav = document.getElementById('mainNav');
+        if (navToggle && mainNav) {
+            navToggle.addEventListener('click', () => {
+                mainNav.classList.toggle('mobile-open');
+            });
+
+            // Close menu on link click
+            document.querySelectorAll('.nav-menu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mainNav.classList.remove('mobile-open');
+                });
+            });
+        }
+
+        // 4. FAQ Accordion Interaction
+        document.querySelectorAll('.faq-item').forEach(item => {
+            const questionBtn = item.querySelector('.faq-question');
+            questionBtn.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+
+                // Close all other open items
+                document.querySelectorAll('.faq-item').forEach(other => {
+                    if (other !== item) other.classList.remove('active');
+                });
+
+                // Toggle current item
+                item.classList.toggle('active', !isActive);
             });
         });
 
-        // Simple scroll animation
-        const observerOptions = {
-            threshold: 0.1
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
+        // 5. Smooth Scroll for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const targetId = this.getAttribute('href');
+                if (targetId && targetId.length > 1 && targetId.startsWith('#')) {
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        e.preventDefault();
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
                 }
             });
-        }, observerOptions);
-
-        document.querySelectorAll('.glass').forEach(card => {
-            observer.observe(card);
         });
     </script>
 </body>
