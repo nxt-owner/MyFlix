@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MyFlix - Cinema Portal</title>
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 
     <!-- OpenGraph Meta Tags for WhatsApp, Facebook, Telegram & Social Media -->
     <meta property="og:site_name" content="MyFlix Cinema">
@@ -264,11 +264,16 @@
 <body>
     <!-- Top Bar -->
     <nav class="glass-nav">
-        <a href="index.html" class="brand-link">
-            <img src="logo.png" alt="MyFlix App Icon" class="brand-icon" id="navLogo">
+        <a href="/" class="brand-link">
+            <img src="https://myflix.techlasiya.com/logo.png" 
+                 srcset="/logo.png 1x, https://raw.githubusercontent.com/nxt-owner/MyFlix/main/logo.png 2x" 
+                 onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/nxt-owner/MyFlix/main/logo.png';" 
+                 alt="MyFlix App Icon" 
+                 class="brand-icon" 
+                 id="navLogo">
             <span>MY<span style="color: var(--primary-light);">FLIX</span></span>
         </a>
-        <a href="index.html" class="btn-nav-home" id="navHomeBtn">
+        <a href="/index.html" class="btn-nav-home" id="navHomeBtn">
             <i data-lucide="home"></i>
             <span>Home</span>
         </a>
@@ -285,7 +290,7 @@
             <p class="portal-desc" id="portalDesc">Please wait while we route your destination.</p>
 
             <div class="portal-cta-group" id="portalCtaGroup">
-                <a href="index.html" class="btn-portal-primary">
+                <a href="/index.html" class="btn-portal-primary">
                     <span>Return to Homepage</span>
                 </a>
             </div>
@@ -340,7 +345,7 @@
                     <i data-lucide="download"></i>
                     <span>Don't have the app? Download APK</span>
                 </a>
-                <a href="index.html" style="color: var(--text-muted); font-size: 0.88rem; text-decoration: none; margin-top: 6px;">
+                <a href="/index.html" style="color: var(--text-muted); font-size: 0.88rem; text-decoration: none; margin-top: 6px;">
                     &larr; Return to MyFlix Homepage
                 </a>
             `;
@@ -367,7 +372,7 @@
             portalDesc.innerHTML = `The scene or page you are looking for was cut from the final edit or never existed.`;
 
             portalCtaGroup.innerHTML = `
-                <a href="index.html" class="btn-portal-primary">
+                <a href="/index.html" class="btn-portal-primary">
                     <i data-lucide="home"></i>
                     <span>Return to Homepage</span>
                 </a>
@@ -376,7 +381,7 @@
                     <span>Download MyFlix App (APK)</span>
                 </a>
             `;
-            portalTimer.innerHTML = `<a href="index.html" style="color: var(--primary-light); text-decoration: none; font-size: 0.88rem;">&larr; Back to MyFlix Cinema</a>`;
+            portalTimer.innerHTML = `<a href="/index.html" style="color: var(--primary-light); text-decoration: none; font-size: 0.88rem;">&larr; Back to MyFlix Cinema</a>`;
         }
 
         lucide.createIcons();
