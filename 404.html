@@ -75,7 +75,12 @@
             --radius-pill: 9999px;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Inter', -apple-system, sans-serif;
             background-color: var(--bg-main);
@@ -129,6 +134,7 @@
             font-weight: 600;
             transition: all 0.25s ease;
         }
+
         .btn-nav-home:hover {
             background: rgba(255, 255, 255, 0.15);
         }
@@ -166,6 +172,7 @@
             color: #ffffff;
             box-shadow: 0 8px 24px var(--primary-glow);
         }
+
         .portal-icon-box svg {
             width: 32px;
             height: 32px;
@@ -229,6 +236,7 @@
             box-shadow: 0 8px 24px var(--primary-glow);
             transition: all 0.25s ease;
         }
+
         .btn-portal-primary:hover {
             transform: translateY(-2px);
             box-shadow: 0 12px 30px rgba(139, 92, 246, 0.6);
@@ -249,6 +257,7 @@
             font-size: 0.94rem;
             transition: all 0.25s ease;
         }
+
         .btn-portal-secondary:hover {
             background: rgba(255, 255, 255, 0.1);
         }
@@ -323,7 +332,7 @@
             const { type, id } = deepLink;
             const typeLabel = type === 'tv' ? 'TV Series' : 'Movie';
             const appUrl = `slcinema://app/${type}/${id}`;
-            const apkUrl = "https://github.com/nxt-owner/MyFlix/releases/download/V2.4.0/MyFlix-V2.4.0.apk";
+            const apkUrl = "https://github.com/nxt-owner/MyFlix/releases/download/V2.4.2/app-release.apk";
 
             document.title = `MyFlix - Opening ${typeLabel}...`;
             portalBadge.innerHTML = `<span style="width:8px;height:8px;background:#10b981;border-radius:50%;display:inline-block;"></span> Deep-Link Detected`;
@@ -371,7 +380,7 @@
                     <i data-lucide="home"></i>
                     <span>Return to Homepage</span>
                 </a>
-                <a href="https://github.com/nxt-owner/MyFlix/releases/download/V2.4.0/MyFlix-V2.4.0.apk" class="btn-portal-secondary" download>
+                <a href="https://github.com/nxt-owner/MyFlix/releases/download/V2.4.2/app-release.apk" class="btn-portal-secondary" download>
                     <i data-lucide="download"></i>
                     <span>Download MyFlix App (APK)</span>
                 </a>
